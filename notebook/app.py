@@ -7,10 +7,10 @@ from connection import connect_to_db
 app = Flask(__name__)
 
 # TODO/NOTE: WARNING - a temporary solution for development.
-#   refer to "best practices for persistent database connections with Flask
+#   use best practices for persistent database connections with Flask.
 connection = connect_to_db()
 
-# TODO: consider using sql alchemy. justify either use case.
+# TODO: consider using sql alchemy. justify either use case. move to models.py
 #  this is for quick poc to verify the feasibility of the schema.
 DROP_TABLE = """DROP TABLE IF EXISTS {};"""
 
@@ -41,9 +41,37 @@ CREATE_STEP_TABLE = """
 
 @app.get('/')
 def home():
-    return {
-        'greeting': 'hi there'
-    }
+    return f'<h2>Notebook exercise by HJ Kim ({get_version()})</h2>'
+
+
+@app.post('/api/v1/notebooks')
+def create_notebook():
+    raise NotImplemented('TODO: create a new notebook')
+
+
+@app.get('/api/v1/notebooks')
+def get_notebook_by_id():
+    raise NotImplemented('TODO: get a notebook by ID')
+
+
+@app.delete('/api/v1/notebooks')
+def delete_notebook_by_id():
+    raise NotImplemented('TODO: delete a notebook by ID')
+
+
+@app.post('/api/v1/steps')
+def create_step():
+    raise NotImplemented('TODO: create a new step in a notebook')
+
+
+@app.get('/api/v1/steps')
+def get_steps_for_notebook():
+    raise NotImplemented('TODO: get steps that belong to a notebook')
+
+
+@app.delete('/api/v1/steps')
+def delete_step_in_notebook():
+    raise NotImplemented('TODO: delete a step by ID that belongs to a notebook')
 
 
 def init_db(conn, drop_tables: bool = False) -> None:
