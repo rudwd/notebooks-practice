@@ -38,7 +38,9 @@ CREATE_STEP_TABLE = """
 
 @app.get('/')
 def home():
-    return 'hi there'
+    return {
+        'greeting': 'hi there'
+    }
 
 
 def init_db(conn, drop_tables: bool = False) -> None:
@@ -53,6 +55,7 @@ def init_db(conn, drop_tables: bool = False) -> None:
         cursor = conn.cursor()
         if drop_tables:
             print('WARNING: Dropping existing tables.')
+            # TODO: factor out table names
             cursor.execute(DROP_TABLE.format('step'))
             cursor.execute(DROP_TABLE.format('notebook'))
 

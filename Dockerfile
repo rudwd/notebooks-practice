@@ -18,4 +18,4 @@ EXPOSE 5000
 # TODO: use a production wsgi server.
 ENTRYPOINT ["python"]
 
-CMD ["notebook/server.py"]
+CMD ["notebook/app.py"]
