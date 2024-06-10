@@ -6,9 +6,34 @@ from connection import connect_to_db
 
 app = Flask(__name__)
 
-# TODO/NOTE: WARNING - a temporary hack for development due to time limit.
-#   search and refer to solutions for "best practices for persistent database connections with Flask..."
+# TODO/NOTE: WARNING - a temporary solution for development.
+#   refer to "best practices for persistent database connections with Flask
 connection = connect_to_db()
+
+# TODO: consider using sql alchemy. justify either use case.
+#  this is for quick poc to verify the feasibility of the schema.
+DROP_TABLE = """DROP TABLE IF EXISTS {};"""
+
+CREATE_NOTEBOOK_TABLE = """
+        CREATE TABLE notebook (
+            notebook_id serial PRIMARY KEY,
+            title varchar (150) NOT NULL UNIQUE
+        );
+        """
+
+CREATE_STEP_TABLE = """
+        CREATE TYPE step_type AS ENUM ('Code', 'Markdown');
+
+        CREATE TABLE step (
+            step_id serial PRIMARY KEY,
+            title varchar (150) NOT NULL,
+            step_index int,
+            type step_type,
+            content varchar (255),
+            notebook_id int,
+            FOREIGN KEY (notebook_id) REFERENCES notebook(notebook_id) ON DELETE CASCADE
+        );
+"""
 
 
 @app.get('/')
