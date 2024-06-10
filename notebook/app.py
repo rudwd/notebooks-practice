@@ -46,32 +46,32 @@ def home():
 
 @app.post('/api/v1/notebooks')
 def create_notebook():
-    raise NotImplemented('TODO: create a new notebook')
+    return 'create a new notebook'
 
 
 @app.get('/api/v1/notebooks')
 def get_notebook_by_id():
-    raise NotImplemented('TODO: get a notebook by ID')
+    return 'get a notebook by ID'
 
 
 @app.delete('/api/v1/notebooks')
 def delete_notebook_by_id():
-    raise NotImplemented('TODO: delete a notebook by ID')
+    return 'delete a notebook by ID'
 
 
 @app.post('/api/v1/steps')
 def create_step():
-    raise NotImplemented('TODO: create a new step in a notebook')
+    return 'create a new step in a notebook'
 
 
 @app.get('/api/v1/steps')
 def get_steps_for_notebook():
-    raise NotImplemented('TODO: get steps that belong to a notebook')
+    return 'get steps that belong to a notebook'
 
 
 @app.delete('/api/v1/steps')
 def delete_step_in_notebook():
-    raise NotImplemented('TODO: delete a step by ID that belongs to a notebook')
+    return 'delete a step by ID that belongs to a notebook'
 
 
 def init_db(conn, drop_tables: bool = False) -> None:
