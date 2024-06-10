@@ -2,8 +2,10 @@ import os
 import json
 from flask import Flask
 from version import get_version
+from connection import connect_to_db
 
 app = Flask(__name__)
+connection = connect_to_db()
 
 
 @app.get('/')
