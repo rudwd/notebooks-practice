@@ -21,9 +21,12 @@ CREATE_NOTEBOOK_TABLE = """
         );
         """
 
-CREATE_STEP_TABLE = """
+CREATE_TYPES = """
+        DROP TYPE IF EXISTS step_type;
         CREATE TYPE step_type AS ENUM ('Code', 'Markdown');
+"""
 
+CREATE_STEP_TABLE = """
         CREATE TABLE step (
             step_id serial PRIMARY KEY,
             title varchar (150) NOT NULL,
@@ -59,6 +62,7 @@ def init_db(conn, drop_tables: bool = False) -> None:
             cursor.execute(DROP_TABLE.format('step'))
             cursor.execute(DROP_TABLE.format('notebook'))
 
+        cursor.execute(CREATE_TYPES)
         cursor.execute(CREATE_NOTEBOOK_TABLE)
         cursor.execute(CREATE_STEP_TABLE)
         conn.commit()
