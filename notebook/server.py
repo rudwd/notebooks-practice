@@ -41,8 +41,34 @@ def home():
     return 'hi there'
 
 
+def init_db(conn, drop_tables: bool = False) -> None:
+    """
+    Initialises database by creating required tables.
+    :param conn: Connection to database
+    :param drop_tables: Drop existing tables if true.
+    :return: None
+    """
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        if drop_tables:
+            print('WARNING: Dropping existing tables.')
+            cursor.execute(DROP_TABLE.format('step'))
+            cursor.execute(DROP_TABLE.format('notebook'))
+
+        cursor.execute(CREATE_NOTEBOOK_TABLE)
+        cursor.execute(CREATE_STEP_TABLE)
+        conn.commit()
+    finally:
+        if cursor:
+            cursor.close()
+
+
 if __name__ == '__main__':
     app.config.from_file('config.json', load=json.load)
+
+    print('== Initialise database')
+    init_db(connection, drop_tables=app.config["DEV"])
 
     print(f'** Notebook server version: {get_version(os.path.join("notebook", "__init__.py"))}')
     app.run(
