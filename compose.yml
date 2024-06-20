@@ -13,7 +13,7 @@ services:
 
   db:
     image: "postgres:16.3"
-    hostname: $POSTGRES_HOST
+    hostname: $POSTGRES_HOST # NOTE: This is required to connect to the container from an app running on host.
     ports:
       - 5432:5432
     restart: always

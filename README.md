@@ -1,13 +1,10 @@
-# Backend Exercise
+# Minimal Flask Backend with PostgreSQL Exercise
 
 ### Overview
-This repository contains an exercise focused on creating Jupyter-like notebooks using Flask 
-and PostgreSQL. The project took approximately 4-5 hours to complete, spread loosely over three days. 
-Additionally, some time was spent reading documentation for Flask, SQLAlchemy, Jupyter Notebook, 
-and other related technologies, as I had no prior experience with them.
-
-Given the time constraints, I focused on implementing the fundamentals, such as setting up
-Docker Compose and establishing a connection to the database.
+The repository serves as both an exercise and a demonstration of the bare minimum code 
+needed to set up a Flask app with PostgreSQL in containers. It focuses on the fundamentals, 
+such as the minimum Docker Compose configuration and establishing a connection from 
+the Flask app to the database.
 
 ### Running Project
 
@@ -22,18 +19,20 @@ docker compose up --build
 
 Once all containers have successfully started, access the server using `http://127.0.0.1:5000/`.
 
-#### Example APIs (Work In Progress)
+#### Example (Dummy) APIs
 
 * GET `/api/v1/notebooks`
 * GET `/api/v1/steps`
 
 ### What's Been Implemented
 
-* Flask app and Postgres docker compose set up.
+* Flask app and Postgres Docker compose set up.
 * Establishing connection to the database using retry.
-* Basic tables for notebooks and steps.
+* Minimal configuration.
+* Basic queries for creating database tables.
+* Basic versioning.
 
-### Next TODOs
+### Next 
 
 * Implement API logic and tests (e.g., creating a notebook).
 * Properly maintain the database connection.
