@@ -1,11 +1,12 @@
 import os
 import psycopg2
-from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 
 # TODO: retry is required until db is ready for connection.
 #  consider using health check in compose.yml which might be neater.
-@retry(stop=stop_after_attempt(5), wait=wait_fixed(3), reraise=True,
+@retry(stop=stop_after_attempt(5),
+       wait=wait_exponential(multiplier=1, min=3, max=10), reraise=True,
        retry=retry_if_exception_type(psycopg2.OperationalError))
 def connect_to_db():
     """
